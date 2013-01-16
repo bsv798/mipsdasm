@@ -1,0 +1,329 @@
+Some code optimizations which I may implement in the future.
+The purpose is to reduce instruction count therefore increasing execution speed
+and getting additional space for custom code and data.
+
+801538A4	lui    v1, $8014
+801538A8	lbu    v1, $3d44(v1)
+801538AC	nop
+801538B0	sll    v0, v1, $02
+801538B4	addu   v0, v0, v1
+801538B8	sll    v0, v0, $03
+801538BC	addu   v0, s1, v0
+801538C0	addiu  a0, v0, $0010	||
+801538C4	addiu  v1, v0, $0018	||
+801538C8	addiu  v0, v0, $0020	|| reduce to 3 instructions
+801538CC	swc2   t4, $0000(a0)	|| like in code below
+801538D0	swc2   t5, $0000(v1)	||
+801538D4	swc2   t6, $0000(v0)	||
+801538D8	sll    v0, s2, $02
+801538DC	addu   v0, v0, s2
+801538E0	sll    t1, v0, $04
+801538E4	lui    at, $8013
+801538E8	addu   at, at, t1
+801538EC	lhu    v0, $d8c6(at)
+801538F0	nop
+801538F4	beq    v0, zero, L153a8c [$80153a8c]
+801538F8	sll    a0, v0, $02
+801538FC	addu   a0, a0, v0
+80153900	sll    a0, a0, $04
+80153904	lui    a3, $8014
+80153908	lbu    a3, $3d44(a3)
+8015390C	lui    v1, $8013
+80153910	addiu  v1, v1, $d880 (=-$2780)
+80153914	sll    v0, a3, $02
+80153918	addu   v0, v0, a3
+8015391C	sll    v0, v0, $03
+80153920	addu   v0, v0, v1
+80153924	lw     v1, $0020(t2)
+80153928	addu   t0, a0, v0
+8015392C	sw     v1, $0008(t0)
+80153930	lw     v0, $0010(t2)
+80153934	nop
+80153938	sw     v0, $0010(t0)
+8015393C	lbu    a1, $0000(s0)
+80153940	nop
+80153944	sll    a1, a1, $07
+80153948	addiu  a1, a1, $c040 (=-$3fc0)
+8015394C	sh     a1, $0000(s3)
+80153950	lbu    a0, $0001(s0)
+80153954	nop
+80153958	addiu  a0, a0, $ff80 (=-$80)
+8015395C	sll    a0, a0, $07
+80153960	addiu  v0, a0, $ffc0 (=-$40)
+80153964	sh     v0, $0002(s3)
+80153968	lbu    v1, $0001(s0)
+8015396C	lui    v0, $8010
+80153970	lbu    v0, $4000(v0)
+80153974	nop
+80153978	mult   v1, v0
+8015397C	lui    a2, $8010
+80153980	lbu    v1, $0000(s0)
+80153984	ori    a2, a2, $4034
+80153988	sll    v1, v1, $02
+8015398C	mflo   t3
+80153990	sll    v0, t3, $02
+80153994	addu   v0, v0, a2
+80153998	addu   v1, v1, v0
+8015399C	lui    at, $1f80
+801539A0	sw     v1, $0010(at)
+801539A4	lb     v0, $0000(v1)
+801539A8	addiu  a0, a0, $0040
+801539AC	sh     a1, $0008(s3)
+801539B0	sh     a0, $000a(s3)
+801539B4	sll    v0, v0, $04
+801539B8	subu   v0, zero, v0
+801539BC	sh     v0, $0004(s3)
+801539C0	lhu    v0, $0002(v1)
+801539C4	lui    t3, $1f80
+801539C8	addiu  t3, t3, $0014
+801539CC	sll    v0, v0, $18
+801539D0	sra    v0, v0, $14
+801539D4	subu   v0, zero, v0
+801539D8	sh     v0, $000c(s3)
+801539DC	lwc2   zero, $0000(t3)
+801539E0	lwc2   at, $0004(t3)	||
+801539E4	lwc2   v0, $0008(t3)	||
+801539E8	lwc2   v1, $000c(t3)	|| like here for example
+801539EC	lwc2   a0, $0010(t3)	||
+801539F0	lwc2   a1, $0014(t3)	||
+801539F4	lui    a1, $00ff
+801539F8	lhu    v0, $0002(s0)
+801539FC	ori    a1, a1, $ffff
+80153A00	srl    v0, v0, $0c
+80153A04	andi   v0, v0, $0002
+80153A08	xori   v0, v0, $0002
+80153A0C	addu   v0, a3, v0
+80153A10	sll    v0, v0, $03
+80153A14	addu   v0, v0, s5
+80153A18	lui    at, $8014
+80153A1C	addu   at, at, v0
+80153A20	lw     a0, $2cc4(at)
+80153A24	lui    v1, $ff00
+80153A28	lw     v0, $0000(a0)
+80153A2C	and    a1, t0, a1
+80153A30	and    v0, v0, v1
+80153A34	or     v0, v0, a1
+80153A38	sw     v0, $0000(a0)
+80153A3C	nop
+80153A40	nop
+80153A44	gte_func17t0,r11r12
+80153A48	addiu  v1, t0, $0020
+80153A4C	lhu    v0, $0002(s0)
+80153A50	lui    t3, $1f80
+80153A54	addiu  t3, t3, $0034
+80153A58	srl    v0, v0, $0c
+80153A5C	andi   v0, v0, $0002
+80153A60	xori   v0, v0, $0002
+80153A64	addu   a3, a3, v0
+80153A68	sll    a3, a3, $03
+80153A6C	addu   a3, a3, s5
+80153A70	addiu  v0, t0, $0018
+80153A74	lui    at, $8014
+80153A78	addu   at, at, a3
+80153A7C	sw     t0, $2cc4(at)
+80153A80	swc2   t4, $0000(v1)
+80153A84	swc2   t5, $0000(v0)
+80153A88	swc2   t6, $0000(t3)
+
+L153a8c:	; 80153A8C
+80153A8C	lui    at, $8013
+80153A90	addu   at, at, t1
+80153A94	lhu    v0, $d8ce(at)
+80153A98	nop
+80153A9C	beq    v0, zero, L153c40 [$80153c40]
+80153AA0	sll    a0, v0, $02
+80153AA4	addu   a0, a0, v0
+80153AA8	sll    a0, a0, $04
+80153AAC	lui    a3, $8014
+80153AB0	lbu    a3, $3d44(a3)
+80153AB4	lui    v1, $8013
+80153AB8	addiu  v1, v1, $d880 (=-$2780)
+80153ABC	sll    v0, a3, $02
+80153AC0	addu   v0, v0, a3
+80153AC4	sll    v0, v0, $03
+80153AC8	addu   v0, v0, v1
+80153ACC	lw     v1, $0018(t2)
+80153AD0	addu   t0, a0, v0
+80153AD4	sw     v1, $0008(t0)
+80153AD8	lw     v0, $0020(t2)
+80153ADC	nop
+80153AE0	sw     v0, $0010(t0)
+80153AE4	lbu    a0, $0000(s0)
+80153AE8	nop
+80153AEC	addiu  a0, a0, $ff80 (=-$80)
+80153AF0	sll    a0, a0, $07
+80153AF4	addiu  v0, a0, $ffc0 (=-$40)
+80153AF8	sh     v0, $0000(s3)
+80153AFC	lbu    a1, $0001(s0)
+80153B00	nop
+80153B04	sll    a1, a1, $07
+80153B08	addiu  a1, a1, $c040 (=-$3fc0)
+80153B0C	sh     a1, $0002(s3)
+80153B10	lbu    v0, $0001(s0)
+80153B14	lui    v1, $8010
+80153B18	lbu    v1, $4000(v1)
+80153B1C	addiu  v0, v0, $0001
+80153B20	mult   v0, v1
+80153B24	lui    a2, $8010
+80153B28	lbu    v1, $0000(s0)
+80153B2C	ori    a2, a2, $4030
+80153B30	sll    v1, v1, $02
+80153B34	mflo   t3
+80153B38	sll    v0, t3, $02
+80153B3C	addu   v0, v0, a2
+80153B40	addu   v1, v1, v0
+80153B44	lui    at, $1f80
+80153B48	sw     v1, $0010(at)
+80153B4C	lb     v0, $0000(v1)
+80153B50	addiu  a0, a0, $0040
+80153B54	sh     a0, $0008(s3)
+80153B58	lui    at, $1f80
+80153B5C	sh     a1, $001e(at)
+80153B60	sll    v0, v0, $04
+80153B64	subu   v0, zero, v0
+80153B68	sh     v0, $0004(s3)
+80153B6C	lw     v0, $0000(v1)
+80153B70	lui    t3, $1f80
+80153B74	addiu  t3, t3, $0014
+80153B78	sll    v0, v0, $10
+80153B7C	sra    v0, v0, $18
+80153B80	sll    v0, v0, $04
+80153B84	subu   v0, zero, v0
+80153B88	lui    at, $1f80
+80153B8C	sh     v0, $0020(at)
+80153B90	lwc2   zero, $0000(t3)
+80153B94	lwc2   at, $0004(t3)
+80153B98	lwc2   v0, $0008(t3)
+80153B9C	lwc2   v1, $000c(t3)
+80153BA0	lwc2   a0, $0010(t3)
+80153BA4	lwc2   a1, $0014(t3)
+80153BA8	lui    a1, $00ff
+80153BAC	lhu    v0, $0002(s0)
+80153BB0	ori    a1, a1, $ffff
+80153BB4	srl    v0, v0, $0b
+80153BB8	andi   v0, v0, $0002
+80153BBC	xori   v0, v0, $0002
+80153BC0	addu   v0, a3, v0
+80153BC4	sll    v0, v0, $03
+80153BC8	addu   v0, v0, s5
+80153BCC	lui    at, $8014
+80153BD0	addu   at, at, v0
+80153BD4	lw     a0, $2cc4(at)
+80153BD8	lui    v1, $ff00
+80153BDC	lw     v0, $0000(a0)
+80153BE0	and    a1, t0, a1
+80153BE4	and    v0, v0, v1
+80153BE8	or     v0, v0, a1
+80153BEC	sw     v0, $0000(a0)
+80153BF0	nop
+80153BF4	nop
+80153BF8	gte_func17t0,r11r12
+80153BFC	addiu  v1, t0, $0018
+80153C00	lhu    v0, $0002(s0)
+80153C04	lui    t3, $1f80
+80153C08	addiu  t3, t3, $0034
+80153C0C	srl    v0, v0, $0b
+80153C10	andi   v0, v0, $0002
+80153C14	xori   v0, v0, $0002
+80153C18	addu   a3, a3, v0
+80153C1C	sll    a3, a3, $03
+80153C20	addu   a3, a3, s5
+80153C24	addiu  v0, t0, $0020
+80153C28	lui    at, $8014
+80153C2C	addu   at, at, a3
+80153C30	sw     t0, $2cc4(at)
+80153C34	swc2   t4, $0000(v1)
+80153C38	swc2   t5, $0000(v0)
+80153C3C	swc2   t6, $0000(t3)
+
+L153c40:	; 80153C40
+80153C40	lui    v1, $1f80
+80153C44	lw     v1, $000c(v1)
+80153C48	addiu  fp, fp, $0001
+80153C4C	addiu  v0, zero, $001c
+80153C50	sll    v1, v1, $01
+80153C54	subu   v0, v0, v1
+80153C58	slt    v0, fp, v0
+80153C5C	bne    v0, zero, L1532d4 [$801532d4]
+80153C60	addiu  v0, zero, $001b
+
+---------------------------------------------------------------
+
+remove all marked lui insructions except first
+80153580	lui    t1, $8014
+80153584	lbu    t1, $3d44(t1)
+80153588	lui    v0, $1f80	||
+8015358C	lw     v0, $0034(v0)
+80153590	sll    a1, t1, $02
+80153594	addu   a1, a1, t1
+80153598	sll    a1, a1, $03
+8015359C	addu   t0, a1, s1
+801535A0	sw     v0, $0008(t0)
+801535A4	lui    a0, $1f80	||
+801535A8	lhu    a0, $0014(a0)
+801535AC	lui    v1, $1f80	||
+801535B0	lhu    v1, $0016(v1)
+801535B4	lui    a3, $1f80	||
+801535B8	lw     a3, $0010(a3)
+801535BC	addiu  a2, a0, $0080
+801535C0	lui    at, $1f80	||
+801535C4	sh     a2, $001c(at)
+801535C8	lui    at, $1f80	||
+801535CC	sh     v1, $001e(at)
+801535D0	lw     v0, $0000(a3)
+801535D4	addiu  v1, v1, $0080
+801535D8	lui    at, $1f80	||
+801535DC	sh     a0, $0024(at)
+801535E0	lui    at, $1f80	||
+801535E4	sh     v1, $0026(at)
+801535E8	sll    v0, v0, $10
+801535EC	sra    v0, v0, $18
+801535F0	sll    v0, v0, $04
+801535F4	subu   v0, zero, v0
+801535F8	lui    at, $1f80	||
+801535FC	sh     v0, $0020(at)
+80153600	lb     v0, $0002(a3)
+80153604	lui    at, $1f80	||
+80153608	sh     a2, $002c(at)
+8015360C	lui    at, $1f80	||
+80153610	sh     v1, $002e(at)
+80153614	sll    v0, v0, $04
+80153618	subu   v0, zero, v0
+8015361C	lui    at, $1f80	||
+80153620	sh     v0, $0028(at)
+80153624	lb     v0, $0003(a3)
+80153628	lui    t3, $1f80	||
+8015362C	addiu  t3, t3, $001c
+80153630	sll    v0, v0, $04
+80153634	subu   v0, zero, v0
+80153638	lui    at, $1f80	||
+8015363C	sh     v0, $0030(at)
+80153640	lwc2   zero, $0000(t3)
+80153644	lwc2   at, $0004(t3)
+80153648	lwc2   v0, $0008(t3)
+8015364C	lwc2   v1, $000c(t3)
+80153650	lwc2   a0, $0010(t3)
+80153654	lwc2   a1, $0014(t3)
+80153658	sll    v0, s2, $02
+8015365C	addu   v0, v0, s2
+80153660	sll    v0, v0, $04
+80153664	lui    v1, $8013
+80153668	addiu  v1, v1, $d880 (=-$2780)
+8015366C	addu   a1, a1, v1
+80153670	addu   t2, v0, a1
+80153674	nop
+80153678	nop
+8015367C	gte_func17t0,r11r12
+80153680	lhu    v1, $0002(s0)
+80153684	nop
+80153688	andi   v0, v1, $8000
+8015368C	beq    v0, zero, L153750 [$80153750]
+80153690	andi   v0, v1, $4000
+80153694	beq    v0, zero, L153704 [$80153704]
+80153698	sll    v0, t1, $03
+8015369C	beq    s6, zero, L1536b0 [$801536b0]
+801536A0	addu   v1, v0, zero
+801536A4	lw     t3, $0040(sp)
+801536A8	nop
+801536AC	addu   v1, v0, t3
+
