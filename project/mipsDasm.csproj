@@ -65,6 +65,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="ps1\Ps1RegiserSet.cs" />
     <Compile Include="Register.cs" />
     <Compile Include="RegisterSet.cs" />
   </ItemGroup>
