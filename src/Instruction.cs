@@ -197,6 +197,34 @@ namespace mipsDasm
         }
     }
 
+    public abstract class ExceptionInstruction : Instruction
+    {
+        protected int code;
+
+        public ExceptionInstruction(string name, int code)
+            : base(name)
+        {
+            this.code = code;
+        }
+
+        public override string ToString()
+        {
+            if (code != 0)
+                return string.Format("{1}\t${2:x3}", name, code);
+            else
+                return base.ToString();
+        }
+    }
+
+
+    public sealed class NopInstruction : Instruction
+    {
+        public NopInstruction()
+            : base("nop")
+        {
+
+        }
+    }
 
     #region Immediate instructions
 
@@ -767,22 +795,21 @@ namespace mipsDasm
 
     #endregion
 
-    public sealed class SyscallInstruction : Instruction
+    public sealed class SyscallInstruction : ExceptionInstruction
     {
-        public SyscallInstruction()
-            : base("syscall")
+        public SyscallInstruction(int code)
+            : base("syscall", code)
         {
 
         }
     }
 
-    public sealed class BreakInstruction : Instruction
+    public sealed class BreakInstruction : ExceptionInstruction
     {
-        public BreakInstruction()
-            : base("break")
+        public BreakInstruction(int code)
+            : base("break", code)
         {
 
         }
     }
-
 }
