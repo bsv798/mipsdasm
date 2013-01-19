@@ -7,6 +7,7 @@ namespace mipsDasm
 {
     public abstract class Instruction
     {
+        public const int opcode = 0;
         protected string name;
 
         private Instruction()
@@ -25,6 +26,28 @@ namespace mipsDasm
         }
     }
 
+
+    public abstract class SpecialInstruction : Instruction
+    {
+        public new const int opcode = 0;
+
+        public SpecialInstruction(string name)
+            : base(name)
+        {
+
+        }
+    }
+
+    public abstract class RegimmInstruction : Instruction
+    {
+        public new const int opcode = 1;
+
+        public RegimmInstruction(string name)
+            : base(name)
+        {
+
+        }
+    }
 
     public abstract class ImmediateInstruction : Instruction
     {
@@ -46,7 +69,7 @@ namespace mipsDasm
         }
     }
 
-    public abstract class RegisterInstruction : Instruction
+    public abstract class RegisterInstruction : SpecialInstruction
     {
         protected Register rd;
         protected Register rs;
@@ -86,17 +109,23 @@ namespace mipsDasm
         }
     }
 
-    public abstract class ImmediateShiftInstruction : ImmediateInstruction
+    public abstract class ImmediateShiftInstruction : SpecialInstruction
     {
-        public ImmediateShiftInstruction(string name, Register rt, Register rs, short immediate)
-            : base(name, rt, rs, immediate)
-        {
+        protected Register rt;
+        protected Register rs;
+        protected short shamt;
 
+        public ImmediateShiftInstruction(string name, Register rt, Register rs, short shamt)
+            : base(name)
+        {
+            this.rt = rt;
+            this.rs = rs;
+            this.shamt = shamt;
         }
 
         public override string ToString()
         {
-            return string.Format("{1}\t{2}, {3}, ${4:x2}", name, rt, rs, immediate);
+            return string.Format("{1}\t{2}, {3}, ${4:x2}", name, rt, rs, shamt);
         }
     }
 
@@ -109,7 +138,7 @@ namespace mipsDasm
         }
     }
 
-    public abstract class MultDivInstruction : Instruction
+    public abstract class MultDivInstruction : SpecialInstruction
     {
         protected Register rs;
         protected Register rt;
@@ -127,7 +156,7 @@ namespace mipsDasm
         }
     }
 
-    public abstract class MultDivMoveInstruction : Instruction
+    public abstract class MultDivMoveInstruction : SpecialInstruction
     {
         protected Register rd;
 
@@ -197,7 +226,25 @@ namespace mipsDasm
         }
     }
 
-    public abstract class ExceptionInstruction : Instruction
+    public abstract class BranchRegimmInstruction : RegimmInstruction
+    {
+        protected Register rs;
+        protected int offset;
+
+        public BranchRegimmInstruction(string name, Register rs, int offset)
+            : base(name)
+        {
+            this.rs = rs;
+            this.offset = offset;
+        }
+
+        public override string ToString()
+        {
+            return string.Format("{1}\t{2}, ${3:x8}", name, rs, offset);
+        }
+    }
+
+    public abstract class ExceptionInstruction : SpecialInstruction
     {
         protected int code;
 
@@ -219,6 +266,8 @@ namespace mipsDasm
 
     public sealed class NopInstruction : Instruction
     {
+        public new const int opcode = 8;
+
         public NopInstruction()
             : base("nop")
         {
@@ -230,6 +279,8 @@ namespace mipsDasm
 
     public sealed class AddiInstruction : ImmediateInstruction
     {
+        public new const int opcode = 8;
+
         public AddiInstruction(Register rt, Register rs, short immediate)
             : base("addi", rt, rs, immediate)
         {
@@ -239,6 +290,8 @@ namespace mipsDasm
 
     public sealed class AddiuInstruction : ImmediateInstruction
     {
+        public new const int opcode = 9;
+
         public AddiuInstruction(Register rt, Register rs, short immediate)
             : base("addiu", rt, rs, immediate)
         {
@@ -248,6 +301,8 @@ namespace mipsDasm
 
     public sealed class SltiInstruction : ImmediateInstruction
     {
+        public new const int opcode = 10;
+
         public SltiInstruction(Register rt, Register rs, short immediate)
             : base("slti", rt, rs, immediate)
         {
@@ -257,6 +312,8 @@ namespace mipsDasm
 
     public sealed class SltiuInstruction : ImmediateInstruction
     {
+        public new const int opcode = 11;
+
         public SltiuInstruction(Register rt, Register rs, short immediate)
             : base("sltiu", rt, rs, immediate)
         {
@@ -266,6 +323,8 @@ namespace mipsDasm
 
     public sealed class AndiInstruction : ImmediateInstruction
     {
+        public new const int opcode = 12;
+
         public AndiInstruction(Register rt, Register rs, short immediate)
             : base("andi", rt, rs, immediate)
         {
@@ -275,6 +334,8 @@ namespace mipsDasm
 
     public sealed class OriInstruction : ImmediateInstruction
     {
+        public new const int opcode = 13;
+
         public OriInstruction(Register rt, Register rs, short immediate)
             : base("ori", rt, rs, immediate)
         {
@@ -284,6 +345,8 @@ namespace mipsDasm
 
     public sealed class XoriInstruction : ImmediateInstruction
     {
+        public new const int opcode = 14;
+
         public XoriInstruction(Register rt, Register rs, short immediate)
             : base("xori", rt, rs, immediate)
         {
@@ -295,6 +358,7 @@ namespace mipsDasm
 
     public sealed class LuiInstruction : Instruction
     {
+        public new const int opcode = 15;
         private Register rt;
         private short immediate;
 
@@ -315,6 +379,8 @@ namespace mipsDasm
 
     public sealed class AddInstruction : RegisterInstruction
     {
+        public new const int opcode = 32;
+
         public AddInstruction(Register rd, Register rs, Register rt)
             : base("add", rd, rs, rt)
         {
@@ -324,6 +390,8 @@ namespace mipsDasm
 
     public sealed class AdduInstruction : RegisterInstruction
     {
+        public new const int opcode = 33;
+
         public AdduInstruction(Register rd, Register rs, Register rt)
             : base("addu", rd, rs, rt)
         {
@@ -333,6 +401,8 @@ namespace mipsDasm
 
     public sealed class SubInstruction : RegisterInstruction
     {
+        public new const int opcode = 34;
+
         public SubInstruction(Register rd, Register rs, Register rt)
             : base("sub", rd, rs, rt)
         {
@@ -342,6 +412,8 @@ namespace mipsDasm
 
     public sealed class SubuInstruction : RegisterInstruction
     {
+        public new const int opcode = 35;
+
         public SubuInstruction(Register rd, Register rs, Register rt)
             : base("subu", rd, rs, rt)
         {
@@ -351,6 +423,8 @@ namespace mipsDasm
 
     public sealed class SltInstruction : RegisterInstruction
     {
+        public new const int opcode = 42;
+
         public SltInstruction(Register rd, Register rs, Register rt)
             : base("slt", rd, rs, rt)
         {
@@ -360,6 +434,8 @@ namespace mipsDasm
 
     public sealed class SltuInstruction : RegisterInstruction
     {
+        public new const int opcode = 43;
+
         public SltuInstruction(Register rd, Register rs, Register rt)
             : base("sltu", rd, rs, rt)
         {
@@ -369,6 +445,8 @@ namespace mipsDasm
 
     public sealed class AndInstruction : RegisterInstruction
     {
+        public new const int opcode = 36;
+
         public AndInstruction(Register rd, Register rs, Register rt)
             : base("and", rd, rs, rt)
         {
@@ -378,6 +456,8 @@ namespace mipsDasm
 
     public sealed class OrInstruction : RegisterInstruction
     {
+        public new const int opcode = 37;
+
         public OrInstruction(Register rd, Register rs, Register rt)
             : base("or", rd, rs, rt)
         {
@@ -387,6 +467,8 @@ namespace mipsDasm
 
     public sealed class XorInstruction : RegisterInstruction
     {
+        public new const int opcode = 38;
+
         public XorInstruction(Register rd, Register rs, Register rt)
             : base("xor", rd, rs, rt)
         {
@@ -396,6 +478,8 @@ namespace mipsDasm
 
     public sealed class NorInstruction : RegisterInstruction
     {
+        public new const int opcode = 39;
+
         public NorInstruction(Register rd, Register rs, Register rt)
             : base("nor", rd, rs, rt)
         {
@@ -409,6 +493,8 @@ namespace mipsDasm
 
     public sealed class LbInstruction : LoadStoreInstruction
     {
+        public new const int opcode = 32;
+
         public LbInstruction(Register rt, short offset, Register @base)
             : base("lb", rt, offset, @base)
         {
@@ -418,6 +504,8 @@ namespace mipsDasm
 
     public sealed class LbuInstruction : LoadStoreInstruction
     {
+        public new const int opcode = 36;
+
         public LbuInstruction(Register rt, short offset, Register @base)
             : base("lbu", rt, offset, @base)
         {
@@ -427,6 +515,8 @@ namespace mipsDasm
 
     public sealed class LhInstruction : LoadStoreInstruction
     {
+        public new const int opcode = 33;
+
         public LhInstruction(Register rt, short offset, Register @base)
             : base("lh", rt, offset, @base)
         {
@@ -436,6 +526,8 @@ namespace mipsDasm
 
     public sealed class LhuInstruction : LoadStoreInstruction
     {
+        public new const int opcode = 37;
+
         public LhuInstruction(Register rt, short offset, Register @base)
             : base("lhu", rt, offset, @base)
         {
@@ -445,6 +537,8 @@ namespace mipsDasm
 
     public sealed class LwInstruction : LoadStoreInstruction
     {
+        public new const int opcode = 35;
+
         public LwInstruction(Register rt, short offset, Register @base)
             : base("lw", rt, offset, @base)
         {
@@ -454,6 +548,8 @@ namespace mipsDasm
 
     public sealed class LwlInstruction : LoadStoreInstruction
     {
+        public new const int opcode = 34;
+
         public LwlInstruction(Register rt, short offset, Register @base)
             : base("lwl", rt, offset, @base)
         {
@@ -463,6 +559,8 @@ namespace mipsDasm
 
     public sealed class LwrInstruction : LoadStoreInstruction
     {
+        public new const int opcode = 38;
+
         public LwrInstruction(Register rt, short offset, Register @base)
             : base("lwr", rt, offset, @base)
         {
@@ -472,6 +570,8 @@ namespace mipsDasm
 
     public sealed class SbInstruction : LoadStoreInstruction
     {
+        public new const int opcode = 40;
+
         public SbInstruction(Register rt, short offset, Register @base)
             : base("sb", rt, offset, @base)
         {
@@ -481,6 +581,8 @@ namespace mipsDasm
 
     public sealed class ShInstruction : LoadStoreInstruction
     {
+        public new const int opcode = 41;
+
         public ShInstruction(Register rt, short offset, Register @base)
             : base("sh", rt, offset, @base)
         {
@@ -490,6 +592,8 @@ namespace mipsDasm
 
     public sealed class SwInstruction : LoadStoreInstruction
     {
+        public new const int opcode = 43;
+
         public SwInstruction(Register rt, short offset, Register @base)
             : base("sw", rt, offset, @base)
         {
@@ -499,6 +603,8 @@ namespace mipsDasm
 
     public sealed class SwlInstruction : LoadStoreInstruction
     {
+        public new const int opcode = 42;
+
         public SwlInstruction(Register rt, short offset, Register @base)
             : base("swl", rt, offset, @base)
         {
@@ -508,6 +614,8 @@ namespace mipsDasm
 
     public sealed class SwrInstruction : LoadStoreInstruction
     {
+        public new const int opcode = 46;
+
         public SwrInstruction(Register rt, short offset, Register @base)
             : base("swr", rt, offset, @base)
         {
@@ -521,8 +629,10 @@ namespace mipsDasm
 
     public sealed class SllInstruction : ImmediateShiftInstruction
     {
-        public SllInstruction(Register rt, Register rs, short immediate)
-            : base("sll", rt, rs, immediate)
+        public new const int opcode = 0;
+
+        public SllInstruction(Register rt, Register rs, short shamt)
+            : base("sll", rt, rs, shamt)
         {
 
         }
@@ -530,8 +640,10 @@ namespace mipsDasm
 
     public sealed class SrlInstruction : ImmediateShiftInstruction
     {
-        public SrlInstruction(Register rt, Register rs, short immediate)
-            : base("srl", rt, rs, immediate)
+        public new const int opcode = 2;
+
+        public SrlInstruction(Register rt, Register rs, short shamt)
+            : base("srl", rt, rs, shamt)
         {
 
         }
@@ -539,8 +651,10 @@ namespace mipsDasm
 
     public sealed class SraInstruction : ImmediateShiftInstruction
     {
-        public SraInstruction(Register rt, Register rs, short immediate)
-            : base("sra", rt, rs, immediate)
+        public new const int opcode = 3;
+
+        public SraInstruction(Register rt, Register rs, short shamt)
+            : base("sra", rt, rs, shamt)
         {
 
         }
@@ -552,6 +666,8 @@ namespace mipsDasm
 
     public sealed class SllvInstruction : RegisterShiftInstruction
     {
+        public new const int opcode = 4;
+
         public SllvInstruction(Register rd, Register rs, Register rt)
             : base("sllv", rd, rs, rt)
         {
@@ -561,6 +677,8 @@ namespace mipsDasm
 
     public sealed class SrlvInstruction : RegisterShiftInstruction
     {
+        public new const int opcode = 6;
+
         public SrlvInstruction(Register rd, Register rs, Register rt)
             : base("srlv", rd, rs, rt)
         {
@@ -570,6 +688,8 @@ namespace mipsDasm
 
     public sealed class SravInstruction : RegisterShiftInstruction
     {
+        public new const int opcode = 7;
+
         public SravInstruction(Register rd, Register rs, Register rt)
             : base("srav", rd, rs, rt)
         {
@@ -583,6 +703,8 @@ namespace mipsDasm
 
     public sealed class MultInstruction : MultDivInstruction
     {
+        public new const int opcode = 24;
+
         public MultInstruction(Register rs, Register rt)
             : base("mult", rs, rt)
         {
@@ -592,6 +714,8 @@ namespace mipsDasm
 
     public sealed class MultuInstruction : MultDivInstruction
     {
+        public new const int opcode = 25;
+
         public MultuInstruction(Register rs, Register rt)
             : base("multu", rs, rt)
         {
@@ -601,6 +725,8 @@ namespace mipsDasm
 
     public sealed class DivInstruction : MultDivInstruction
     {
+        public new const int opcode = 26;
+
         public DivInstruction(Register rs, Register rt)
             : base("div", rs, rt)
         {
@@ -610,6 +736,8 @@ namespace mipsDasm
 
     public sealed class DivuInstruction : MultDivInstruction
     {
+        public new const int opcode = 27;
+
         public DivuInstruction(Register rs, Register rt)
             : base("divu", rs, rt)
         {
@@ -623,6 +751,8 @@ namespace mipsDasm
 
     public sealed class MfhiInstruction : MultDivMoveInstruction
     {
+        public new const int opcode = 16;
+
         public MfhiInstruction(Register rd)
             : base("mfhi", rd)
         {
@@ -632,6 +762,8 @@ namespace mipsDasm
 
     public sealed class MfloInstruction : MultDivMoveInstruction
     {
+        public new const int opcode = 18;
+
         public MfloInstruction(Register rd)
             : base("mflo", rd)
         {
@@ -641,6 +773,8 @@ namespace mipsDasm
 
     public sealed class MthiInstruction : MultDivMoveInstruction
     {
+        public new const int opcode = 17;
+
         public MthiInstruction(Register rd)
             : base("mthi", rd)
         {
@@ -650,6 +784,8 @@ namespace mipsDasm
 
     public sealed class MtloInstruction : MultDivMoveInstruction
     {
+        public new const int opcode = 19;
+
         public MtloInstruction(Register rd)
             : base("mtlo", rd)
         {
@@ -663,6 +799,8 @@ namespace mipsDasm
 
     public sealed class JInstruction : JumpTargetInstruction
     {
+        public new const int opcode = 2;
+
         public JInstruction(int target)
             : base("j", target)
         {
@@ -672,6 +810,8 @@ namespace mipsDasm
 
     public sealed class JalInstruction : JumpTargetInstruction
     {
+        public new const int opcode = 3;
+
         public JalInstruction(int target)
             : base("jal", target)
         {
@@ -681,8 +821,9 @@ namespace mipsDasm
 
     #endregion
 
-    public sealed class JrInstruction : Instruction
+    public sealed class JrInstruction : SpecialInstruction
     {
+        public new const int opcode = 8;
         private Register rs;
 
         public JrInstruction(Register rs)
@@ -697,8 +838,9 @@ namespace mipsDasm
         }
     }
 
-    public sealed class JalrInstruction : Instruction
+    public sealed class JalrInstruction : SpecialInstruction
     {
+        public new const int opcode = 9;
         private Register rs;
         private Register rd;
 
@@ -719,6 +861,8 @@ namespace mipsDasm
 
     public sealed class BeqInstruction : BranchRegisterInstruction
     {
+        public new const int opcode = 4;
+
         public BeqInstruction(Register rs, Register rt, int offset)
             : base("beq", rs, rt, offset)
         {
@@ -728,6 +872,8 @@ namespace mipsDasm
 
     public sealed class BneInstruction : BranchRegisterInstruction
     {
+        public new const int opcode = 5;
+
         public BneInstruction(Register rs, Register rt, int offset)
             : base("bne", rs, rt, offset)
         {
@@ -741,6 +887,8 @@ namespace mipsDasm
 
     public sealed class BlezInstruction : BranchInstruction
     {
+        public new const int opcode = 6;
+
         public BlezInstruction(Register rs, int offset)
             : base("blez", rs, offset)
         {
@@ -750,6 +898,8 @@ namespace mipsDasm
 
     public sealed class BgtzInstruction : BranchInstruction
     {
+        public new const int opcode = 7;
+
         public BgtzInstruction(Register rs, int offset)
             : base("bgtz", rs, offset)
         {
@@ -757,8 +907,10 @@ namespace mipsDasm
         }
     }
 
-    public sealed class BltzInstruction : BranchInstruction
+    public sealed class BltzInstruction : BranchRegimmInstruction
     {
+        public new const int opcode = 0;
+
         public BltzInstruction(Register rs, int offset)
             : base("bltz", rs, offset)
         {
@@ -766,8 +918,10 @@ namespace mipsDasm
         }
     }
 
-    public sealed class BgezInstruction : BranchInstruction
+    public sealed class BgezInstruction : BranchRegimmInstruction
     {
+        public new const int opcode = 1;
+
         public BgezInstruction(Register rs, int offset)
             : base("bgez", rs, offset)
         {
@@ -775,8 +929,10 @@ namespace mipsDasm
         }
     }
 
-    public sealed class BltzalInstruction : BranchInstruction
+    public sealed class BltzalInstruction : BranchRegimmInstruction
     {
+        public new const int opcode = 16;
+
         public BltzalInstruction(Register rs, int offset)
             : base("bltzal", rs, offset)
         {
@@ -784,8 +940,10 @@ namespace mipsDasm
         }
     }
 
-    public sealed class BgezalInstruction : BranchInstruction
+    public sealed class BgezalInstruction : BranchRegimmInstruction
     {
+        public new const int opcode = 17;
+
         public BgezalInstruction(Register rs, int offset)
             : base("bgezal", rs, offset)
         {
@@ -797,6 +955,8 @@ namespace mipsDasm
 
     public sealed class SyscallInstruction : ExceptionInstruction
     {
+        public new const int opcode = 12;
+
         public SyscallInstruction(int code)
             : base("syscall", code)
         {
@@ -806,6 +966,8 @@ namespace mipsDasm
 
     public sealed class BreakInstruction : ExceptionInstruction
     {
+        public new const int opcode = 13;
+
         public BreakInstruction(int code)
             : base("break", code)
         {
