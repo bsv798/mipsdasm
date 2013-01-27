@@ -58,6 +58,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\..\..\src\Extension.cs">
+      <Link>Extension.cs</Link>
+    </Compile>
     <Compile Include="..\..\..\src\Instruction.cs">
       <Link>Instruction.cs</Link>
     </Compile>
@@ -66,6 +69,9 @@
     </Compile>
     <Compile Include="..\..\..\src\Program.cs">
       <Link>Program.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\src\ps1\Ps1InstructionSet.cs">
+      <Link>Ps1InstructionSet.cs</Link>
     </Compile>
     <Compile Include="..\..\..\src\ps1\Ps1RegiserSet.cs">
       <Link>Ps1RegiserSet.cs</Link>
