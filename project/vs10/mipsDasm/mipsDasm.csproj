@@ -70,11 +70,17 @@
     <Compile Include="..\..\..\src\Program.cs">
       <Link>Program.cs</Link>
     </Compile>
+    <Compile Include="..\..\..\src\ps1\Ps1Cop2cRegisterSet.cs">
+      <Link>Ps1Cop2cRegisterSet.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\src\ps1\Ps1Cop2dRegisterSet.cs">
+      <Link>Ps1Cop2dRegisterSet.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\src\ps1\Ps1GprRegisterSet.cs">
+      <Link>Ps1GprRegisterSet.cs</Link>
+    </Compile>
     <Compile Include="..\..\..\src\ps1\Ps1InstructionSet.cs">
       <Link>Ps1InstructionSet.cs</Link>
-    </Compile>
-    <Compile Include="..\..\..\src\ps1\Ps1RegiserSet.cs">
-      <Link>Ps1RegiserSet.cs</Link>
     </Compile>
     <Compile Include="..\..\..\src\Register.cs">
       <Link>Register.cs</Link>

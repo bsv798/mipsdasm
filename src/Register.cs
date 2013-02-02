@@ -44,6 +44,7 @@ namespace mipsDasm
         }
     }
 
+
     public sealed class R00zr : Register
     {
         public R00zr()
@@ -327,6 +328,584 @@ namespace mipsDasm
     {
         public R31ra()
             : base("r31", "ra")
+        {
+
+        }
+    }
+
+
+    public sealed class R00r11r12 : Register
+    {
+        public R00r11r12()
+            : base("r0", "r11r12")
+        {
+
+        }
+    }
+
+    public sealed class R01r13r21 : Register
+    {
+        public R01r13r21()
+            : base("r1", "r13r21")
+        {
+
+        }
+    }
+
+    public sealed class R02r22r23 : Register
+    {
+        public R02r22r23()
+            : base("r2", "r22r23")
+        {
+
+        }
+    }
+
+    public sealed class R03r31r32 : Register
+    {
+        public R03r31r32()
+            : base("r3", "r31r32")
+        {
+
+        }
+    }
+
+    public sealed class R04r33 : Register
+    {
+        public R04r33()
+            : base("r4", "r33")
+        {
+
+        }
+    }
+
+    public sealed class R05trx : Register
+    {
+        public R05trx()
+            : base("r5", "trx")
+        {
+
+        }
+    }
+
+    public sealed class R06try : Register
+    {
+        public R06try()
+            : base("r6", "try")
+        {
+
+        }
+    }
+
+    public sealed class R07trz : Register
+    {
+        public R07trz()
+            : base("r7", "trz")
+        {
+
+        }
+    }
+
+    public sealed class R08l11l12 : Register
+    {
+        public R08l11l12()
+            : base("r8", "l11l12")
+        {
+
+        }
+    }
+
+    public sealed class R09l13l21 : Register
+    {
+        public R09l13l21()
+            : base("r9", "l13l21")
+        {
+
+        }
+    }
+
+    public sealed class R10l22l23 : Register
+    {
+        public R10l22l23()
+            : base("r10", "l22l23")
+        {
+
+        }
+    }
+
+    public sealed class R11l31l32 : Register
+    {
+        public R11l31l32()
+            : base("r11", "l31l32")
+        {
+
+        }
+    }
+
+    public sealed class R12l33 : Register
+    {
+        public R12l33()
+            : base("r12", "l33")
+        {
+
+        }
+    }
+
+    public sealed class R13rbk : Register
+    {
+        public R13rbk()
+            : base("r13", "rbk")
+        {
+
+        }
+    }
+
+    public sealed class R14bbk : Register
+    {
+        public R14bbk()
+            : base("r14", "bbk")
+        {
+
+        }
+    }
+
+    public sealed class R15gbk : Register
+    {
+        public R15gbk()
+            : base("r15", "gbk")
+        {
+
+        }
+    }
+
+    public sealed class R16lr1lr2 : Register
+    {
+        public R16lr1lr2()
+            : base("r16", "lr1lr2")
+        {
+
+        }
+    }
+
+    public sealed class R17lr3lg1 : Register
+    {
+        public R17lr3lg1()
+            : base("r17", "lr3lg3")
+        {
+
+        }
+    }
+
+    public sealed class R18lg2lg3 : Register
+    {
+        public R18lg2lg3()
+            : base("r18", "lg2lg3")
+        {
+
+        }
+    }
+
+    public sealed class R19lb1lb2 : Register
+    {
+        public R19lb1lb2()
+            : base("r19", "lb1lb2")
+        {
+
+        }
+    }
+
+    public sealed class R20lb3 : Register
+    {
+        public R20lb3()
+            : base("r20", "lb3")
+        {
+
+        }
+    }
+
+    public sealed class R21rfc : Register
+    {
+        public R21rfc()
+            : base("r21", "rfc")
+        {
+
+        }
+    }
+
+    public sealed class R22gfc : Register
+    {
+        public R22gfc()
+            : base("r22", "gfc")
+        {
+
+        }
+    }
+
+    public sealed class R23bfc : Register
+    {
+        public R23bfc()
+            : base("r23", "bfc")
+        {
+
+        }
+    }
+
+    public sealed class R24ofx : Register
+    {
+        public R24ofx()
+            : base("r24", "ofx")
+        {
+
+        }
+    }
+
+    public sealed class R25ofy : Register
+    {
+        public R25ofy()
+            : base("r25", "ofy")
+        {
+
+        }
+    }
+
+    public sealed class R26h : Register
+    {
+        public R26h()
+            : base("r26", "h")
+        {
+
+        }
+    }
+
+    public sealed class R27dqa : Register
+    {
+        public R27dqa()
+            : base("r27", "dqa")
+        {
+
+        }
+    }
+
+    public sealed class R28dqb : Register
+    {
+        public R28dqb()
+            : base("r28", "dqb")
+        {
+
+        }
+    }
+
+    public sealed class R29zsf3 : Register
+    {
+        public R29zsf3()
+            : base("r29", "zsf3")
+        {
+
+        }
+    }
+
+    public sealed class R30zsf4 : Register
+    {
+        public R30zsf4()
+            : base("r30", "zsf4")
+        {
+
+        }
+    }
+
+    public sealed class R31flag : Register
+    {
+        public R31flag()
+            : base("r31", "flag")
+        {
+
+        }
+    }
+
+
+    public sealed class R00vxy0 : Register
+    {
+        public R00vxy0()
+            : base("r0", "vxy0")
+        {
+
+        }
+    }
+
+    public sealed class R01vz0 : Register
+    {
+        public R01vz0()
+            : base("r1", "vz0")
+        {
+
+        }
+    }
+
+    public sealed class R02vxy1 : Register
+    {
+        public R02vxy1()
+            : base("r2", "vxy1")
+        {
+
+        }
+    }
+
+    public sealed class R03vz1 : Register
+    {
+        public R03vz1()
+            : base("r3", "vz1")
+        {
+
+        }
+    }
+
+    public sealed class R04vx2 : Register
+    {
+        public R04vx2()
+            : base("r4", "vx2")
+        {
+
+        }
+    }
+
+    public sealed class R05vz2 : Register
+    {
+        public R05vz2()
+            : base("r5", "vz2")
+        {
+
+        }
+    }
+
+    public sealed class R06rgb : Register
+    {
+        public R06rgb()
+            : base("r6", "rgb")
+        {
+
+        }
+    }
+
+    public sealed class R07otz : Register
+    {
+        public R07otz()
+            : base("r7", "otz")
+        {
+
+        }
+    }
+
+    public sealed class R08ir0 : Register
+    {
+        public R08ir0()
+            : base("r8", "ir0")
+        {
+
+        }
+    }
+
+    public sealed class R09ir1 : Register
+    {
+        public R09ir1()
+            : base("r9", "ir1")
+        {
+
+        }
+    }
+
+    public sealed class R10ir2 : Register
+    {
+        public R10ir2()
+            : base("r10", "ir2")
+        {
+
+        }
+    }
+
+    public sealed class R11ir3 : Register
+    {
+        public R11ir3()
+            : base("r11", "ir3")
+        {
+
+        }
+    }
+
+    public sealed class R12sxy0 : Register
+    {
+        public R12sxy0()
+            : base("r12", "sxy0")
+        {
+
+        }
+    }
+
+    public sealed class R13sxy1 : Register
+    {
+        public R13sxy1()
+            : base("r13", "sxy1")
+        {
+
+        }
+    }
+
+    public sealed class R14sxy2 : Register
+    {
+        public R14sxy2()
+            : base("r14", "sxy2")
+        {
+
+        }
+    }
+
+    public sealed class R15sxyp : Register
+    {
+        public R15sxyp()
+            : base("r15", "sxyp")
+        {
+
+        }
+    }
+
+    public sealed class R16sz0 : Register
+    {
+        public R16sz0()
+            : base("r16", "sz0")
+        {
+
+        }
+    }
+
+    public sealed class R17sz1 : Register
+    {
+        public R17sz1()
+            : base("r17", "sz1")
+        {
+
+        }
+    }
+
+    public sealed class R18sz2 : Register
+    {
+        public R18sz2()
+            : base("r18", "sz2")
+        {
+
+        }
+    }
+
+    public sealed class R19sz3 : Register
+    {
+        public R19sz3()
+            : base("r19", "sz3")
+        {
+
+        }
+    }
+
+    public sealed class R20rgb0 : Register
+    {
+        public R20rgb0()
+            : base("r20", "rgb0")
+        {
+
+        }
+    }
+
+    public sealed class R21rgb1 : Register
+    {
+        public R21rgb1()
+            : base("r21", "rgb1")
+        {
+
+        }
+    }
+
+    public sealed class R22rgb2 : Register
+    {
+        public R22rgb2()
+            : base("r22", "rgb2")
+        {
+
+        }
+    }
+
+    public sealed class R23res1 : Register
+    {
+        public R23res1()
+            : base("r23", "res1")
+        {
+
+        }
+    }
+
+    public sealed class R24mac0 : Register
+    {
+        public R24mac0()
+            : base("r24", "mac0")
+        {
+
+        }
+    }
+
+    public sealed class R25mac1 : Register
+    {
+        public R25mac1()
+            : base("r25", "mac1")
+        {
+
+        }
+    }
+
+    public sealed class R26mac2 : Register
+    {
+        public R26mac2()
+            : base("r26", "mac2")
+        {
+
+        }
+    }
+
+    public sealed class R27mac3 : Register
+    {
+        public R27mac3()
+            : base("r27", "mac3")
+        {
+
+        }
+    }
+
+    public sealed class R28irgb : Register
+    {
+        public R28irgb()
+            : base("r28", "irgb")
+        {
+
+        }
+    }
+
+    public sealed class R29orgb : Register
+    {
+        public R29orgb()
+            : base("r29", "orgb")
+        {
+
+        }
+    }
+
+    public sealed class R30lzcs : Register
+    {
+        public R30lzcs()
+            : base("r30", "lzcs")
+        {
+
+        }
+    }
+
+    public sealed class R31lzcr : Register
+    {
+        public R31lzcr()
+            : base("r31", "lzcr")
         {
 
         }

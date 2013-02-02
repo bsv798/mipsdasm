@@ -5,9 +5,9 @@ using System.Text;
 
 namespace mipsDasm.ps1
 {
-    public class Ps1RegiserSet : RegisterSet
+    public class Ps1GprRegiserSet : RegisterSet
     {
-        public Ps1RegiserSet()
+        public Ps1GprRegiserSet()
         {
             arr = new Register[32];
             arr[0] = new R00zr();
