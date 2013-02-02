@@ -49,6 +49,17 @@ namespace mipsDasm
         }
     }
 
+    public abstract class Cop2Instruction : Instruction
+    {
+        public new const int opcode = 18;
+
+        public Cop2Instruction(string name)
+            : base(name)
+        {
+
+        }
+    }
+
     public abstract class ImmediateInstruction : Instruction
     {
         protected Register rt;
@@ -287,6 +298,24 @@ namespace mipsDasm
                 return string.Format("{1}\t${2:x3}", name, code);
             else
                 return base.ToString();
+        }
+    }
+
+    public abstract class Cop2MoveInstruction : Cop2Instruction
+    {
+        protected Register rt;
+        protected Register rs;
+
+        public Cop2MoveInstruction(string name, Register rt, Register rs)
+            : base(name)
+        {
+            this.rt = rt;
+            this.rs = rs;
+        }
+
+        public override string ToString()
+        {
+            return string.Format("{1}\t{2}, {3}", name, rt, rs);
         }
     }
 
@@ -1001,4 +1030,74 @@ namespace mipsDasm
 
         }
     }
+
+    #region Cop2 instructions
+
+    public sealed class Lwc2Instruction : LoadStoreInstruction
+    {
+        public new const int opcode = 50;
+
+        public Lwc2Instruction(Register rt, int offset, Register @base)
+            : base("lwc2", rt, offset, @base)
+        {
+
+        }
+    }
+
+    public sealed class Swc2Instruction : LoadStoreInstruction
+    {
+        public new const int opcode = 58;
+
+        public Swc2Instruction(Register rt, int offset, Register @base)
+            : base("swc2", rt, offset, @base)
+        {
+
+        }
+    }
+
+    public sealed class Mtc2Instruction : Cop2MoveInstruction
+    {
+        public new const int opcode = 4;
+
+        public Mtc2Instruction(Register rt, Register rs)
+            : base("mtc2", rt, rs)
+        {
+
+        }
+    }
+
+    public sealed class Mfc2Instruction : Cop2MoveInstruction
+    {
+        public new const int opcode = 0;
+
+        public Mfc2Instruction(Register rt, Register rs)
+            : base("mfc2", rt, rs)
+        {
+
+        }
+    }
+
+    public sealed class Ctc2Instruction : Cop2MoveInstruction
+    {
+        public new const int opcode = 6;
+
+        public Ctc2Instruction(Register rt, Register rs)
+            : base("ctc2", rt, rs)
+        {
+
+        }
+    }
+
+    public sealed class Cfc2Instruction : Cop2MoveInstruction
+    {
+        public new const int opcode = 2;
+
+        public Cfc2Instruction(Register rt, Register rs)
+            : base("cfc2", rt, rs)
+        {
+
+        }
+    }
+
+    #endregion
 }

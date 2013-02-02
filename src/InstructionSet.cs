@@ -7,11 +7,11 @@ namespace mipsDasm
 {
     public abstract class InstructionSet
     {
-        protected RegisterSet regSet;
+        protected RegisterSet gprRs;
 
-        public InstructionSet(RegisterSet regSet)
+        public InstructionSet(RegisterSet gprRs)
         {
-            this.regSet = regSet;
+            this.gprRs = gprRs;
         }
 
         public abstract Instruction getInstruction(int binary);
