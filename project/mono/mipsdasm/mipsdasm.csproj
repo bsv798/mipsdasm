@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>10.0.0</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{1310903A-49AF-465B-8EB3-9B3C11378F29}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>mipsdasm</RootNamespace>
+    <AssemblyName>mipsdasm</AssemblyName>
+    <StartupObject>mipsDasm.Program</StartupObject>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+    <Externalconsole>true</Externalconsole>
+    <CustomCommands>
+      <CustomCommands>
+        <Command type="BeforeBuild" command="cp ../../../armips/varMacros.asm Resources" workingdir="${ProjectDir}" />
+      </CustomCommands>
+    </CustomCommands>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <DebugType>none</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+    <Externalconsole>true</Externalconsole>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\..\..\src\Extension.cs">
+      <Link>Extension.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\src\Instruction.cs">
+      <Link>Instruction.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\src\InstructionSet.cs">
+      <Link>InstructionSet.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\src\Program.cs">
+      <Link>Program.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\src\Register.cs">
+      <Link>Register.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\src\RegisterSet.cs">
+      <Link>RegisterSet.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\src\ps1\Ps1Cop2cRegisterSet.cs">
+      <Link>Ps1Cop2cRegisterSet.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\src\ps1\Ps1Cop2dRegisterSet.cs">
+      <Link>Ps1Cop2dRegisterSet.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\src\ps1\Ps1GprRegisterSet.cs">
+      <Link>Ps1GprRegisterSet.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\src\ps1\Ps1InstructionSet.cs">
+      <Link>Ps1InstructionSet.cs</Link>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <Folder Include="Properties\" />
+    <Folder Include="Resources\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\varMacros.asm" />
+  </ItemGroup>
+</Project>
