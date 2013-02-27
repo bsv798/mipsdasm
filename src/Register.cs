@@ -910,4 +910,148 @@ namespace mipsDasm
 
         }
     }
+
+    public sealed class R00indx : Register
+    {
+        public R00indx ()
+            :base("r0", "indx")
+        {
+            
+        }
+    }
+
+    public sealed class R01rand : Register
+    {
+        public R01rand ()
+            :base("r1", "rand")
+        {
+            
+        }
+    }
+
+    public sealed class R02tlbl : Register
+    {
+        public R02tlbl ()
+            :base("r2", "tlbl")
+        {
+            
+        }
+    }
+
+    public sealed class R03bpc : Register
+    {
+        public R03bpc ()
+            :base("r3", "bpc")
+        {
+            
+        }
+    }
+
+    public sealed class R04ctxt : Register
+    {
+        public R04ctxt ()
+            :base("r4", "ctxt")
+        {
+            
+        }
+    }
+
+    public sealed class R05bda : Register
+    {
+        public R05bda ()
+            :base("r5", "bda")
+        {
+            
+        }
+    }
+
+    public sealed class R06pidmask : Register
+    {
+        public R06pidmask ()
+            :base("r6", "pidmask")
+        {
+            
+        }
+    }
+
+    public sealed class R07dcic : Register
+    {
+        public R07dcic ()
+            :base("r7", "dcic")
+        {
+            
+        }
+    }
+
+    public sealed class R08badv : Register
+    {
+        public R08badv ()
+            :base("r8", "badv")
+        {
+            
+        }
+    }
+
+    public sealed class R09bdam : Register
+    {
+        public R09bdam ()
+            :base("r9", "bdam")
+        {
+            
+        }
+    }
+
+    public sealed class R10tlbh : Register
+    {
+        public R10tlbh ()
+            :base("r10", "tlbh")
+        {
+            
+        }
+    }
+
+    public sealed class R11bpcm : Register
+    {
+        public R11bpcm ()
+            :base("r11", "bpcm")
+        {
+            
+        }
+    }
+
+    public sealed class R12sr : Register
+    {
+        public R12sr ()
+            :base("r12", "sr")
+        {
+            
+        }
+    }
+
+    public sealed class R13cause : Register
+    {
+        public R13cause ()
+            :base("r13", "cause")
+        {
+            
+        }
+    }
+
+    public sealed class R14epc : Register
+    {
+        public R14epc ()
+            :base("r14", "epc")
+        {
+            
+        }
+    }
+
+    public sealed class R15prid : Register
+    {
+        public R15prid ()
+            :base("r15", "prid")
+        {
+            
+        }
+    }
 }
