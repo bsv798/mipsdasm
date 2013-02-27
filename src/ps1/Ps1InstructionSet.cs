@@ -7,12 +7,14 @@ namespace mipsDasm.ps1
 {
     public sealed class Ps1InstructionSet : InstructionSet
     {
+        private RegisterSet cop0Rs;
         private RegisterSet cop2cRs;
         private RegisterSet cop2dRs;
 
-        public Ps1InstructionSet(RegisterSet gprRs, RegisterSet cop2cRs, RegisterSet cop2dRs)
+        public Ps1InstructionSet(RegisterSet gprRs, RegisterSet cop0Rs, RegisterSet cop2cRs, RegisterSet cop2dRs)
             : base(gprRs)
         {
+            this.cop0Rs = cop0Rs;
             this.cop2cRs = cop2cRs;
             this.cop2dRs = cop2dRs;
         }
@@ -131,25 +133,63 @@ namespace mipsDasm.ps1
                             default:
                                 throw new ArgumentException(string.Format("Unknown instruction: {0:x8}.", binary));
                         }
-                    case Cop2Instruction.opcode:
+                    case Cop0Instruction.opcode:
+                        if (binary.getUIntFromBits(25, 1) == 0)
                         {
                             switch (binary.getUIntFromBits(21, 5))
                             {
-                                case Cfc2Instruction.opcode:
-                                  binary.getUIntFromBits(0, 11).assertEqualsZero();
-                                  return new Cfc2Instruction(gprRs.getRegister(binary.getUIntFromBits(16, 5)), cop2cRs.getRegister(binary.getUIntFromBits(11, 5)));
-                                case Ctc2Instruction.opcode:
-                                  binary.getUIntFromBits(0, 11).assertEqualsZero();
-                                  return new Ctc2Instruction(gprRs.getRegister(binary.getUIntFromBits(16, 5)), cop2cRs.getRegister(binary.getUIntFromBits(11, 5)));
-                                case Mfc2Instruction.opcode:
-                                  binary.getUIntFromBits(0, 11).assertEqualsZero();
-                                  return new Mfc2Instruction(gprRs.getRegister(binary.getUIntFromBits(16, 5)), cop2dRs.getRegister(binary.getUIntFromBits(11, 5)));
-                                case Mtc2Instruction.opcode:
-                                  binary.getUIntFromBits(0, 11).assertEqualsZero();
-                                  return new Mtc2Instruction(gprRs.getRegister(binary.getUIntFromBits(16, 5)), cop2dRs.getRegister(binary.getUIntFromBits(11, 5)));
+                                case Mfc0Instruction.opcode:
+                                    binary.getUIntFromBits(0, 3).assertEqualsZero();
+                                    binary.getUIntFromBits(3, 8).assertEqualsZero();
+                                    return new Mfc0Instruction(gprRs.getRegister(binary.getUIntFromBits(16, 5)), cop0Rs.getRegister(binary.getUIntFromBits(11, 5)));
+                                case Mtc0Instruction.opcode:
+                                    binary.getUIntFromBits(0, 3).assertEqualsZero();
+                                    binary.getUIntFromBits(3, 8).assertEqualsZero();
+                                    return new Mtc0Instruction(gprRs.getRegister(binary.getUIntFromBits(16, 5)), cop0Rs.getRegister(binary.getUIntFromBits(11, 5)));
                                 default:
-                                throw new ArgumentException(string.Format("Unknown instruction: {0:x8}.", binary));
+                                    throw new ArgumentException(string.Format("Unknown instruction: {0:x8}.", binary));
                             }
+                        }
+                        else
+                        {
+                            switch (binary.getUIntFromBits(0, 6))
+                            {
+                                case RfeInstruction.opcode:
+                                    binary.getUIntFromBits(6, 19).assertEqualsZero();
+                                    return new RfeInstruction();
+                                case TlbpInstruction.opcode:
+                                    binary.getUIntFromBits(6, 19).assertEqualsZero();
+                                    return new TlbpInstruction();
+                                case TlbrInstruction.opcode:
+                                    binary.getUIntFromBits(6, 19).assertEqualsZero();
+                                    return new TlbrInstruction();
+                                case TlbwiInstruction.opcode:
+                                    binary.getUIntFromBits(6, 19).assertEqualsZero();
+                                    return new TlbwiInstruction();
+                                case TlbwrInstruction.opcode:
+                                    binary.getUIntFromBits(6, 19).assertEqualsZero();
+                                    return new TlbwrInstruction();
+                                default:
+                                    throw new ArgumentException(string.Format("Unknown instruction: {0:x8}.", binary));
+                            }
+                        }
+                    case Cop2Instruction.opcode:
+                        switch (binary.getUIntFromBits(21, 5))
+                        {
+                            case Cfc2Instruction.opcode:
+                              binary.getUIntFromBits(0, 11).assertEqualsZero();
+                              return new Cfc2Instruction(gprRs.getRegister(binary.getUIntFromBits(16, 5)), cop2cRs.getRegister(binary.getUIntFromBits(11, 5)));
+                            case Ctc2Instruction.opcode:
+                              binary.getUIntFromBits(0, 11).assertEqualsZero();
+                              return new Ctc2Instruction(gprRs.getRegister(binary.getUIntFromBits(16, 5)), cop2cRs.getRegister(binary.getUIntFromBits(11, 5)));
+                            case Mfc2Instruction.opcode:
+                              binary.getUIntFromBits(0, 11).assertEqualsZero();
+                              return new Mfc2Instruction(gprRs.getRegister(binary.getUIntFromBits(16, 5)), cop2dRs.getRegister(binary.getUIntFromBits(11, 5)));
+                            case Mtc2Instruction.opcode:
+                              binary.getUIntFromBits(0, 11).assertEqualsZero();
+                              return new Mtc2Instruction(gprRs.getRegister(binary.getUIntFromBits(16, 5)), cop2dRs.getRegister(binary.getUIntFromBits(11, 5)));
+                            default:
+                            throw new ArgumentException(string.Format("Unknown instruction: {0:x8}.", binary));
                         }
                     case AddiInstruction.opcode:
                         return new AddiInstruction(gprRs.getRegister(binary.getUIntFromBits(16, 5)), gprRs.getRegister(binary.getUIntFromBits(21, 5)), binary.getIntFromBits(0, 16));

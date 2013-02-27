@@ -49,6 +49,17 @@ namespace mipsDasm
         }
     }
 
+    public abstract class Cop0Instruction : Instruction
+    {
+        public new const int opcode = 16;
+
+        public Cop0Instruction(string name)
+            : base(name)
+        {
+
+        }
+    }
+
     public abstract class Cop2Instruction : Instruction
     {
         public new const int opcode = 18;
@@ -298,6 +309,24 @@ namespace mipsDasm
                 return string.Format("{1}\t${2:x3}", name, code);
             else
                 return base.ToString();
+        }
+    }
+
+    public abstract class Cop0MoveInstruction : Cop0Instruction
+    {
+        protected Register rt;
+        protected Register rd;
+
+        public Cop0MoveInstruction(string name, Register rt, Register rd)
+            : base(name)
+        {
+            this.rt = rt;
+            this.rd = rd;
+        }
+
+        public override string ToString()
+        {
+            return string.Format("{1}\t{2}, {3}", name, rt, rd);
         }
     }
 
@@ -1033,6 +1062,87 @@ namespace mipsDasm
 
         }
     }
+
+    #region Cop0 instructions
+
+    public sealed class Mtc0Instruction : Cop0MoveInstruction
+    {
+        public new const int opcode = 4;
+
+        public Mtc0Instruction(Register rt, Register rd)
+            : base("mtc0", rt, rd)
+        {
+
+        }
+    }
+
+    public sealed class Mfc0Instruction : Cop0MoveInstruction
+    {
+        public new const int opcode = 0;
+
+        public Mfc0Instruction(Register rt, Register rd)
+            : base("mfc0", rt, rd)
+        {
+
+        }
+    }
+
+    public sealed class TlbrInstruction : Cop0Instruction
+    {
+        public new const int opcode = 1;
+
+        public TlbrInstruction()
+            : base("tlbr")
+        {
+
+        }
+    }
+
+    public sealed class TlbwiInstruction : Cop0Instruction
+    {
+        public new const int opcode = 2;
+
+        public TlbwiInstruction()
+            : base("tlbwi")
+        {
+
+        }
+    }
+
+    public sealed class TlbwrInstruction : Cop0Instruction
+    {
+        public new const int opcode = 6;
+
+        public TlbwrInstruction()
+            : base("tlbwr")
+        {
+
+        }
+    }
+
+    public sealed class TlbpInstruction : Cop0Instruction
+    {
+        public new const int opcode = 8;
+
+        public TlbpInstruction()
+            : base("tlbp")
+        {
+
+        }
+    }
+
+    public sealed class RfeInstruction : Cop0Instruction
+    {
+        public new const int opcode = 16;
+
+        public RfeInstruction()
+            : base("rfe")
+        {
+
+        }
+    }
+
+    #endregion
 
     #region Cop2 instructions
 
