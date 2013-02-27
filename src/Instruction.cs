@@ -909,7 +909,10 @@ namespace mipsDasm
 
         public override string ToString()
         {
-            return string.Format("{1}\t{2}", name, rd);
+            if (rd.GetType() == typeof(R31ra))
+                return string.Format("{1}\t{2}", name, rs);
+            else
+                return string.Format("{1}\t{2}, {3}", name, rd, rs);
         }
     }
 
