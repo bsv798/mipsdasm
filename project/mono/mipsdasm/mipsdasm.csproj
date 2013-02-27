@@ -71,6 +71,9 @@
       <Link>Ps1InstructionSet.cs</Link>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="..\..\..\src\ps1\Ps1Cop0cRegiserSet.cs">
+      <Link>Ps1Cop0cRegiserSet.cs</Link>
+    </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
