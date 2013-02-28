@@ -71,6 +71,24 @@ namespace mipsDasm
         }
     }
 
+    public abstract class Cop2ImmInstruction : Cop2Instruction
+    {
+        protected int lm;
+        protected int sf;
+
+        public Cop2ImmInstruction(string name, int bin)
+            : base(name)
+        {
+            lm = bin.getUIntFromBits(10, 1);
+            sf = bin.getUIntFromBits(19, 1);
+        }
+
+        public override string ToString()
+        {
+            return string.Format("{1}\tlm{2}, sf{3}", name, lm, sf);
+        }
+    }
+
     public abstract class ImmediateInstruction : Instruction
     {
         protected Register rt;
@@ -1207,6 +1225,259 @@ namespace mipsDasm
 
         public Cfc2Instruction(Register rt, Register rs)
             : base("cfc2", rt, rs)
+        {
+
+        }
+    }
+
+
+    public sealed class RtpsInstruction : Cop2ImmInstruction
+    {
+        public new const int opcode = 1;
+
+        public RtpsInstruction(int bin)
+            : base("rtps", bin)
+        {
+
+        }
+    }
+
+    public sealed class NclipInstruction : Cop2ImmInstruction
+    {
+        public new const int opcode = 6;
+
+        public NclipInstruction(int bin)
+            : base("nclip", bin)
+        {
+
+        }
+    }
+
+    public sealed class OpInstruction : Cop2ImmInstruction
+    {
+        public new const int opcode = 12;
+
+        public OpInstruction(int bin)
+            : base("op", bin)
+        {
+
+        }
+    }
+
+    public sealed class DpcsInstruction : Cop2ImmInstruction
+    {
+        public new const int opcode = 16;
+
+        public DpcsInstruction(int bin)
+            : base("dpcs", bin)
+        {
+
+        }
+    }
+
+    public sealed class IntplInstruction : Cop2ImmInstruction
+    {
+        public new const int opcode = 17;
+
+        public IntplInstruction(int bin)
+            : base("intpl", bin)
+        {
+
+        }
+    }
+
+    public sealed class MvmvaInstruction : Cop2ImmInstruction
+    {
+        public new const int opcode = 18;
+        private int tv;
+        private int mv;
+        private int mm;
+
+        public MvmvaInstruction(int bin)
+            : base("mvmva", bin)
+        {
+            tv = bin.getUIntFromBits(13, 2);
+            mv = bin.getUIntFromBits(15, 2);
+            mm = bin.getUIntFromBits(17, 2);
+        }
+
+        public override string ToString()
+        {
+            return string.Format("{1}\tlm{2}, sf{3}, tv{4}, mv{5}, mm{6}", name, lm, sf, tv, mv, mm);
+        }
+    }
+
+    public sealed class NcdsInstruction : Cop2ImmInstruction
+    {
+        public new const int opcode = 19;
+
+        public NcdsInstruction(int bin)
+            : base("ncds", bin)
+        {
+
+        }
+    }
+
+    public sealed class CdpInstruction : Cop2ImmInstruction
+    {
+        public new const int opcode = 20;
+
+        public CdpInstruction(int bin)
+            : base("cdp", bin)
+        {
+
+        }
+    }
+
+    public sealed class NcdtInstruction : Cop2ImmInstruction
+    {
+        public new const int opcode = 22;
+
+        public NcdtInstruction(int bin)
+            : base("ncdt", bin)
+        {
+
+        }
+    }
+
+    public sealed class NccsInstruction : Cop2ImmInstruction
+    {
+        public new const int opcode = 27;
+
+        public NccsInstruction(int bin)
+            : base("nccs", bin)
+        {
+
+        }
+    }
+
+    public sealed class CcInstruction : Cop2ImmInstruction
+    {
+        public new const int opcode = 28;
+
+        public CcInstruction(int bin)
+            : base("cc", bin)
+        {
+
+        }
+    }
+
+    public sealed class NcsInstruction : Cop2ImmInstruction
+    {
+        public new const int opcode = 30;
+
+        public NcsInstruction(int bin)
+            : base("ncs", bin)
+        {
+
+        }
+    }
+
+    public sealed class NctInstruction : Cop2ImmInstruction
+    {
+        public new const int opcode = 32;
+
+        public NctInstruction(int bin)
+            : base("nct", bin)
+        {
+
+        }
+    }
+
+    public sealed class SqrInstruction : Cop2ImmInstruction
+    {
+        public new const int opcode = 40;
+
+        public SqrInstruction(int bin)
+            : base("sqr", bin)
+        {
+
+        }
+    }
+
+    public sealed class DcplInstruction : Cop2ImmInstruction
+    {
+        public new const int opcode = 41;
+
+        public DcplInstruction(int bin)
+            : base("dcpl", bin)
+        {
+
+        }
+    }
+
+    public sealed class DpctInstruction : Cop2ImmInstruction
+    {
+        public new const int opcode = 42;
+
+        public DpctInstruction(int bin)
+            : base("dpct", bin)
+        {
+
+        }
+    }
+
+    public sealed class Avsz3Instruction : Cop2ImmInstruction
+    {
+        public new const int opcode = 45;
+
+        public Avsz3Instruction(int bin)
+            : base("avsz3", bin)
+        {
+
+        }
+    }
+
+    public sealed class Avsz4Instruction : Cop2ImmInstruction
+    {
+        public new const int opcode = 46;
+
+        public Avsz4Instruction(int bin)
+            : base("avsz4", bin)
+        {
+
+        }
+    }
+
+    public sealed class RtptInstruction : Cop2ImmInstruction
+    {
+        public new const int opcode = 48;
+
+        public RtptInstruction(int bin)
+            : base("rtpt", bin)
+        {
+
+        }
+    }
+
+    public sealed class GpfInstruction : Cop2ImmInstruction
+    {
+        public new const int opcode = 61;
+
+        public GpfInstruction(int bin)
+            : base("gpf", bin)
+        {
+
+        }
+    }
+
+    public sealed class GplInstruction : Cop2ImmInstruction
+    {
+        public new const int opcode = 62;
+
+        public GplInstruction(int bin)
+            : base("gpl", bin)
+        {
+
+        }
+    }
+
+    public sealed class NcctInstruction : Cop2ImmInstruction
+    {
+        public new const int opcode = 63;
+
+        public NcctInstruction(int bin)
+            : base("ncct", bin)
         {
 
         }
