@@ -67,6 +67,9 @@
     <Compile Include="..\..\..\src\InstructionSet.cs">
       <Link>InstructionSet.cs</Link>
     </Compile>
+    <Compile Include="..\..\..\src\Memory.cs">
+      <Link>Memory.cs</Link>
+    </Compile>
     <Compile Include="..\..\..\src\Program.cs">
       <Link>Program.cs</Link>
     </Compile>
@@ -81,6 +84,9 @@
     </Compile>
     <Compile Include="..\..\..\src\ps1\Ps1InstructionSet.cs">
       <Link>Ps1InstructionSet.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\src\ps1\Ps1Memory.cs">
+      <Link>Ps1Memory.cs</Link>
     </Compile>
     <Compile Include="..\..\..\src\Register.cs">
       <Link>Register.cs</Link>
