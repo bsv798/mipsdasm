@@ -50,6 +50,9 @@
     <Compile Include="..\..\..\src\InstructionSet.cs">
       <Link>InstructionSet.cs</Link>
     </Compile>
+    <Compile Include="..\..\..\src\Memory.cs">
+      <Link>Memory.cs</Link>
+    </Compile>
     <Compile Include="..\..\..\src\Program.cs">
       <Link>Program.cs</Link>
     </Compile>
@@ -68,11 +71,23 @@
     <Compile Include="..\..\..\src\ps1\Ps1InstructionSet.cs">
       <Link>Ps1InstructionSet.cs</Link>
     </Compile>
+    <Compile Include="..\..\..\src\ps1\Ps1Loader.cs">
+      <Link>Ps1Loader.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\src\ps1\Ps1Memory.cs">
+      <Link>Ps1Memory.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\src\RawData.cs">
+      <Link>RawData.cs</Link>
+    </Compile>
     <Compile Include="..\..\..\src\Register.cs">
       <Link>Register.cs</Link>
     </Compile>
     <Compile Include="..\..\..\src\RegisterSet.cs">
       <Link>RegisterSet.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\src\Resource.cs">
+      <Link>Resource.cs</Link>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
