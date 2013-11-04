@@ -26,7 +26,9 @@ namespace mipsDasm
             try
             {
                 byte[] buf = new byte[size];
+                fs.Position = fileOffset;
                 fs.Read(buf, 0, size);
+                stream.Position = memOffset;
                 writer.Write(buf);
             }
             finally
