@@ -35,6 +35,11 @@ namespace mipsDasm
             }
         }
 
+        public int GetSize()
+        {
+            return stream.Capacity;
+        }
+
         public int ReadOpcode(int pc)
         {
             return ReadWord(pc);
