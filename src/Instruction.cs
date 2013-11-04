@@ -8,10 +8,11 @@ namespace mipsDasm
     public abstract class Instruction : RawData
     {
         public const int opcode = 0;
+        public new const int size = 4;
         protected string name;
 
         private Instruction()
-            : base(4)
+            : base(size)
         {
 
         }
