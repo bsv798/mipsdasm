@@ -5,17 +5,19 @@ using System.Text;
 
 namespace mipsDasm
 {
-    public abstract class Instruction
+    public abstract class Instruction : RawData
     {
         public const int opcode = 0;
         protected string name;
 
         private Instruction()
+            : base(4)
         {
 
         }
 
         public Instruction(string name)
+            : this()
         {
             this.name = name;
         }
