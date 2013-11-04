@@ -27,5 +27,10 @@ namespace mipsDasm
         {
             assertEquals(actual, 0);
         }
+
+        public static int maskAddr(this int val)
+        {
+            return val & 0x7fffffff;
+        }
     }
 }
