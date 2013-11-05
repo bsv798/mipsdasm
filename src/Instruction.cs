@@ -88,7 +88,7 @@ namespace mipsDasm
 
         public override string ToString()
         {
-            return string.Format("{1}\tlm{2}, sf{3}", name, lm, sf);
+            return string.Format("{0}\tlm{1}, sf{2}", name, lm, sf);
         }
     }
 
@@ -108,7 +108,7 @@ namespace mipsDasm
 
         public override string ToString()
         {
-            return string.Format("{1}\t{2}, {3}, ${4:x4}", name, rt, rs, immediate);
+            return string.Format("{0}\t{1}, {2}, ${3:x4}", name, rt, rs, immediate);
         }
     }
 
@@ -128,7 +128,7 @@ namespace mipsDasm
 
         public override string ToString()
         {
-            return string.Format("{1}\t{2}, {3}, {4}", name, rd, rs, rt);
+            return string.Format("{0}\t{1}, {2}, {3}", name, rd, rs, rt);
         }
     }
 
@@ -148,7 +148,7 @@ namespace mipsDasm
 
         public override string ToString()
         {
-            return string.Format("{1}\t{2}, ${3:x4}({4})", name, rt, offset, @base);
+            return string.Format("{0}\t{1}, ${2:x4}({3})", name, rt, offset, @base);
         }
     }
 
@@ -168,7 +168,7 @@ namespace mipsDasm
 
         public override string ToString()
         {
-            return string.Format("{1}\t{2}, {3}, ${4:x2}", name, rd, rt, shamt);
+            return string.Format("{0}\t{1}, {2}, ${3:x2}", name, rd, rt, shamt);
         }
     }
 
@@ -188,7 +188,7 @@ namespace mipsDasm
 
         public override string ToString()
         {
-            return string.Format("{1}\t{2}, {3}, {4}", name, rd, rt, rs);
+            return string.Format("{0}\t{1}, {2}, {3}", name, rd, rt, rs);
         }
     }
 
@@ -206,7 +206,7 @@ namespace mipsDasm
 
         public override string ToString()
         {
-            return string.Format("{1}\t{2}, {3}", name, rs, rt);
+            return string.Format("{0}\t{1}, {2}", name, rs, rt);
         }
     }
 
@@ -222,7 +222,7 @@ namespace mipsDasm
 
         public override string ToString()
         {
-            return string.Format("{1}\t{2}", name, rd);
+            return string.Format("{0}\t{1}", name, rd);
         }
     }
 
@@ -238,7 +238,7 @@ namespace mipsDasm
 
         public override string ToString()
         {
-            return string.Format("{1}\t{2}", name, rs);
+            return string.Format("{0}\t{1}", name, rs);
         }
     }
 
@@ -254,7 +254,7 @@ namespace mipsDasm
 
         public override string ToString()
         {
-            return string.Format("{1}\t${2:x8}", name, target);
+            return string.Format("{0}\t${1:x8}", name, target);
         }
     }
 
@@ -274,7 +274,7 @@ namespace mipsDasm
 
         public override string ToString()
         {
-            return string.Format("{1}\t{2}, {3}, ${4:x8}", name, rs, rt, offset);
+            return string.Format("{0}\t{1}, {2}, ${3:x8}", name, rs, rt, offset);
         }
     }
 
@@ -292,7 +292,7 @@ namespace mipsDasm
 
         public override string ToString()
         {
-            return string.Format("{1}\t{2}, ${3:x8}", name, rs, offset);
+            return string.Format("{0}\t{1}, ${2:x8}", name, rs, offset);
         }
     }
 
@@ -310,7 +310,7 @@ namespace mipsDasm
 
         public override string ToString()
         {
-            return string.Format("{1}\t{2}, ${3:x8}", name, rs, offset);
+            return string.Format("{0}\t{1}, ${2:x8}", name, rs, offset);
         }
     }
 
@@ -327,7 +327,7 @@ namespace mipsDasm
         public override string ToString()
         {
             if (code != 0)
-                return string.Format("{1}\t${2:x3}", name, code);
+                return string.Format("{0}\t${1:x3}", name, code);
             else
                 return base.ToString();
         }
@@ -347,7 +347,7 @@ namespace mipsDasm
 
         public override string ToString()
         {
-            return string.Format("{1}\t{2}, {3}", name, rt, rd);
+            return string.Format("{0}\t{1}, {2}", name, rt, rd);
         }
     }
 
@@ -365,7 +365,7 @@ namespace mipsDasm
 
         public override string ToString()
         {
-            return string.Format("{1}\t{2}, {3}", name, rt, rs);
+            return string.Format("{0}\t{1}, {2}", name, rt, rs);
         }
     }
 
@@ -477,7 +477,7 @@ namespace mipsDasm
 
         public override string ToString()
         {
-            return string.Format("{1}\t{2}, ${3:x4}", name, rt, immediate);
+            return string.Format("{0}\t{1}, ${2:x4}", name, rt, immediate);
         }
     }
 
@@ -940,7 +940,7 @@ namespace mipsDasm
 
         public override string ToString()
         {
-            return string.Format("{1}\t{2}", name, rs);
+            return string.Format("{0}\t{1}", name, rs);
         }
     }
 
@@ -960,9 +960,9 @@ namespace mipsDasm
         public override string ToString()
         {
             if (rd.GetType() == typeof(R31ra))
-                return string.Format("{1}\t{2}", name, rs);
+                return string.Format("{0}\t{1}", name, rs);
             else
-                return string.Format("{1}\t{2}, {3}", name, rd, rs);
+                return string.Format("{0}\t{1}, {2}", name, rd, rs);
         }
     }
 
@@ -1306,7 +1306,7 @@ namespace mipsDasm
 
         public override string ToString()
         {
-            return string.Format("{1}\tlm{2}, sf{3}, tv{4}, mv{5}, mm{6}", name, lm, sf, tv, mv, mm);
+            return string.Format("{0}\tlm{1}, sf{2}, tv{3}, mv{4}, mm{5}", name, lm, sf, tv, mv, mm);
         }
     }
 
