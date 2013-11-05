@@ -73,6 +73,9 @@
     <Compile Include="..\..\..\src\Program.cs">
       <Link>Program.cs</Link>
     </Compile>
+    <Compile Include="..\..\..\src\ps1\Ps1Cop0cRegiserSet.cs">
+      <Link>Ps1Cop0cRegiserSet.cs</Link>
+    </Compile>
     <Compile Include="..\..\..\src\ps1\Ps1Cop2cRegisterSet.cs">
       <Link>Ps1Cop2cRegisterSet.cs</Link>
     </Compile>
