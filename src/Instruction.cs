@@ -472,7 +472,7 @@ namespace mipsDasm
             : base("lui")
         {
             this.rt = rt;
-            this.immediate = immediate << 16;
+            this.immediate = immediate;
         }
 
         public override string ToString()
