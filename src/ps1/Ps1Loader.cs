@@ -9,9 +9,10 @@ namespace mipsDasm.ps1
 {
     public class Ps1Loader
     {
-        private int pc;
+        private int startPc;
         private Ps1Memory mem;
         public RawData[] data;
+        private Ps1InstructionSet insSet;
 
         public static Ps1Loader FromPs1Executable(string fileName)
         {
@@ -47,9 +48,29 @@ namespace mipsDasm.ps1
             mem = new Ps1Memory();
             mem.LoadFile(memOffset, fileName, fileOffset, size);
 
-            pc = startPc;
+            this.startPc = startPc;
 
             data = new RawData[mem.GetSize() / Instruction.size];
+
+            insSet = new Ps1InstructionSet();
+        }
+
+        public void Analyze()
+        {
+            Analyze(startPc);
+        }
+
+        private void Analyze(int pc)
+        {
+            while (true)
+            {
+                Instruction ins = insSet.getInstruction(mem.ReadOpcode(pc));
+                data[pc / Instruction.size] = ins;
+                pc += 4;
+
+                if ((ins is JrInstruction) && (((JrInstruction)ins).rs is R31ra))
+                    break;
+            }
         }
     }
 }
