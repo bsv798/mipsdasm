@@ -76,8 +76,8 @@ namespace mipsDasm
 
     public abstract class Cop2ImmInstruction : Cop2Instruction
     {
-        protected int lm;
-        protected int sf;
+        public int lm;
+        public int sf;
 
         public Cop2ImmInstruction(string name, int bin)
             : base(name)
@@ -94,9 +94,9 @@ namespace mipsDasm
 
     public abstract class ImmediateInstruction : Instruction
     {
-        protected Register rt;
-        protected Register rs;
-        protected int immediate;
+        public Register rt;
+        public Register rs;
+        public int immediate;
 
         public ImmediateInstruction(string name, Register rt, Register rs, int immediate)
             : base(name)
@@ -114,9 +114,9 @@ namespace mipsDasm
 
     public abstract class RegisterInstruction : SpecialInstruction
     {
-        protected Register rd;
-        protected Register rs;
-        protected Register rt;
+        public Register rd;
+        public Register rs;
+        public Register rt;
 
         public RegisterInstruction(string name, Register rd, Register rs, Register rt)
             : base(name)
@@ -134,9 +134,9 @@ namespace mipsDasm
 
     public abstract class LoadStoreInstruction : Instruction
     {
-        protected Register rt;
-        protected int offset;
-        protected Register @base;
+        public Register rt;
+        public int offset;
+        public Register @base;
 
         public LoadStoreInstruction(string name, Register rt, int offset, Register @base)
             : base(name)
@@ -154,9 +154,9 @@ namespace mipsDasm
 
     public abstract class ImmediateShiftInstruction : SpecialInstruction
     {
-        protected Register rd;
-        protected Register rt;
-        protected int shamt;
+        public Register rd;
+        public Register rt;
+        public int shamt;
 
         public ImmediateShiftInstruction(string name, Register rd, Register rt, int shamt)
             : base(name)
@@ -174,9 +174,9 @@ namespace mipsDasm
 
     public abstract class RegisterShiftInstruction : SpecialInstruction
     {
-        protected Register rd;
-        protected Register rt;
-        protected Register rs;
+        public Register rd;
+        public Register rt;
+        public Register rs;
 
         public RegisterShiftInstruction(string name, Register rd, Register rt, Register rs)
             : base(name)
@@ -194,8 +194,8 @@ namespace mipsDasm
 
     public abstract class MultDivInstruction : SpecialInstruction
     {
-        protected Register rs;
-        protected Register rt;
+        public Register rs;
+        public Register rt;
 
         public MultDivInstruction(string name, Register rs, Register rt)
             : base(name)
@@ -212,7 +212,7 @@ namespace mipsDasm
 
     public abstract class MultDivMoveFromInstruction : SpecialInstruction
     {
-        protected Register rd;
+        public Register rd;
 
         public MultDivMoveFromInstruction(string name, Register rd)
             : base(name)
@@ -228,7 +228,7 @@ namespace mipsDasm
 
     public abstract class MultDivMoveToInstruction : SpecialInstruction
     {
-        protected Register rs;
+        public Register rs;
 
         public MultDivMoveToInstruction(string name, Register rs)
             : base(name)
@@ -244,7 +244,7 @@ namespace mipsDasm
 
     public abstract class JumpTargetInstruction : Instruction
     {
-        protected int target;
+        public int target;
 
         public JumpTargetInstruction(string name, int target)
             : base(name)
@@ -260,9 +260,9 @@ namespace mipsDasm
 
     public abstract class BranchRegisterInstruction : Instruction
     {
-        protected Register rs;
-        protected Register rt;
-        protected int offset;
+        public Register rs;
+        public Register rt;
+        public int offset;
 
         public BranchRegisterInstruction(string name, Register rs, Register rt, int offset)
             : base(name)
@@ -280,8 +280,8 @@ namespace mipsDasm
 
     public abstract class BranchInstruction : Instruction
     {
-        protected Register rs;
-        protected int offset;
+        public Register rs;
+        public int offset;
 
         public BranchInstruction(string name, Register rs, int offset)
             : base(name)
@@ -298,8 +298,8 @@ namespace mipsDasm
 
     public abstract class BranchRegimmInstruction : RegimmInstruction
     {
-        protected Register rs;
-        protected int offset;
+        public Register rs;
+        public int offset;
 
         public BranchRegimmInstruction(string name, Register rs, int offset)
             : base(name)
@@ -316,7 +316,7 @@ namespace mipsDasm
 
     public abstract class ExceptionInstruction : SpecialInstruction
     {
-        protected int code;
+        public int code;
 
         public ExceptionInstruction(string name, int code)
             : base(name)
@@ -335,8 +335,8 @@ namespace mipsDasm
 
     public abstract class Cop0MoveInstruction : Cop0Instruction
     {
-        protected Register rt;
-        protected Register rd;
+        public Register rt;
+        public Register rd;
 
         public Cop0MoveInstruction(string name, Register rt, Register rd)
             : base(name)
@@ -353,8 +353,8 @@ namespace mipsDasm
 
     public abstract class Cop2MoveInstruction : Cop2Instruction
     {
-        protected Register rt;
-        protected Register rs;
+        public Register rt;
+        public Register rs;
 
         public Cop2MoveInstruction(string name, Register rt, Register rs)
             : base(name)
@@ -465,8 +465,8 @@ namespace mipsDasm
     public sealed class LuiInstruction : Instruction
     {
         public new const int opcode = 15;
-        private Register rt;
-        private int immediate;
+        public Register rt;
+        public int immediate;
 
         public LuiInstruction(Register rt, int immediate)
             : base("lui")
@@ -930,7 +930,7 @@ namespace mipsDasm
     public sealed class JrInstruction : SpecialInstruction
     {
         public new const int opcode = 8;
-        private Register rs;
+        public Register rs;
 
         public JrInstruction(Register rs)
             : base("jr")
@@ -947,8 +947,8 @@ namespace mipsDasm
     public sealed class JalrInstruction : SpecialInstruction
     {
         public new const int opcode = 9;
-        private Register rd;
-        private Register rs;
+        public Register rd;
+        public Register rs;
 
         public JalrInstruction(Register rd, Register rs)
             : base("jalr")
@@ -1292,9 +1292,9 @@ namespace mipsDasm
     public sealed class MvmvaInstruction : Cop2ImmInstruction
     {
         public new const int opcode = 18;
-        private int tv;
-        private int mv;
-        private int mm;
+        public int tv;
+        public int mv;
+        public int mm;
 
         public MvmvaInstruction(int bin)
             : base("mvmva", bin)
